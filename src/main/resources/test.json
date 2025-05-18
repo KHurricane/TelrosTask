@@ -1,0 +1,172 @@
+{
+  "info": {
+    "name": "Telrostask API",
+    "_postman_id": "telrostask-api-collection",
+    "description": "Postman collection для тестирования всех endpoint'ов проекта",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{base_url}}/auth/login", "host": ["{{base_url}}"], "path": ["auth", "login"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get all users",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{base_url}}/users", "host": ["{{base_url}}"], "path": ["users"] }
+          }
+        },
+        {
+          "name": "Create user",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{base_url}}/users", "host": ["{{base_url}}"], "path": ["users"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"newuser\",\n  \"password\": \"newpass\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get user by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{base_url}}/users/1", "host": ["{{base_url}}"], "path": ["users", "1"] }
+          }
+        },
+        {
+          "name": "Update user username",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{base_url}}/users/1", "host": ["{{base_url}}"], "path": ["users", "1"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"updateduser\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete user",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{base_url}}/users/1", "host": ["{{base_url}}"], "path": ["users", "1"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "User Details",
+      "item": [
+        {
+          "name": "Get user details",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{base_url}}/users/1/details", "host": ["{{base_url}}"], "path": ["users", "1", "details"] }
+          }
+        },
+        {
+          "name": "Update user details",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{base_url}}/users/1/details", "host": ["{{base_url}}"], "path": ["users", "1", "details"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Иван\",\n  \"lastName\": \"Иванов\",\n  \"middleName\": \"Иванович\",\n  \"birthDate\": \"1990-01-01\",\n  \"email\": \"ivan.ivanov@example.com\",\n  \"phone\": \"+79001234567\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "User Photo",
+      "item": [
+        {
+          "name": "Upload photo",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{base_url}}/users/1/photo", "host": ["{{base_url}}"], "path": ["users", "1", "photo"] },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/photo.jpg"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Download photo",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{base_url}}/users/1/photo", "host": ["{{base_url}}"], "path": ["users", "1", "photo"] }
+          }
+        },
+        {
+          "name": "Delete photo",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{base_url}}/users/1/photo", "host": ["{{base_url}}"], "path": ["users", "1", "photo"] }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8081" },
+    { "key": "token", "value": "" }
+  ]
+}
